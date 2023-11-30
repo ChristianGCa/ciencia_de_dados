@@ -32,7 +32,7 @@ df.groupby('Year')['Life expectancy'].mean().plot(color='blue', linestyle='--', 
 # Adicionar rótulos e título ao gráfico
 plt.xlabel('Ano')
 plt.ylabel('Expectativa de Vida (Idade)')
-plt.title('Expectativa de vida na América do Sul')
+plt.title('Expectativa de vida do Brasil e dos cinco países com a maior ao longo do tempo')
 plt.legend()
 plt.grid(True)
 
@@ -65,7 +65,7 @@ for pais in paises_interesse:
 # Adicionar rótulos e título ao gráfico
 plt.xlabel('Ano')
 plt.ylabel('Expectativa de Vida (Idade)')
-plt.title('Comparação da Expectativa de Vida ao longo do tempo')
+plt.title('Expectativa de vida do Brasil e os países vizinhos')
 plt.legend()
 plt.grid(True)
 
