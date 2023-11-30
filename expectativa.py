@@ -1,7 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# eXPECTATIVA DE VIDA DO BRASIL, OS 5 MELHORES E A MÉDIA
+# EXPECTATIVA DE VIDA DO BRASIL, OS 5 MELHORES E A MÉDIA
+
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Abrindo o arquivo csv
 df = pd.read_csv('expectativa_vida.csv')
@@ -12,9 +15,6 @@ paises_interesse = ['Brazil', 'Japan', 'Switzerland', 'Australia', 'Spain', 'Fra
 # Filtrar os dados para os países de interesse
 df_interesse = df[df['Country'].isin(paises_interesse)]
 
-# Calcular a média mundial da expectativa de vida
-media_mundial = df['Life expectancy'].mean()
-
 # Configurar o tamanho do gráfico
 plt.figure(figsize=(10, 6))
 
@@ -22,12 +22,45 @@ plt.figure(figsize=(10, 6))
 for pais in paises_interesse:
     df_pais = df_interesse[df_interesse['Country'] == pais]
     if pais == 'Brazil':
-        plt.plot(df_pais['Year'], df_pais['Life expectancy'], label=pais, color='black', linewidth=5)
+        plt.plot(df_pais['Year'], df_pais['Life expectancy'], label=pais, color='black', linewidth=3)
     else:
         plt.plot(df_pais['Year'], df_pais['Life expectancy'], label=pais)
 
-# Plotar a média mundial como uma linha no gráfico
-plt.axhline(media_mundial, color='red', linestyle='--', label='Média Mundial')
+# Calcular a média de cada ano
+df.groupby('Year')['Life expectancy'].mean().plot(color='blue', linestyle='--', label='Média Anual')
+
+# Adicionar rótulos e título ao gráfico
+plt.xlabel('Ano')
+plt.ylabel('Expectativa de Vida (Idade)')
+plt.title('Expectativa de vida na América do Sul')
+plt.legend()
+plt.grid(True)
+
+# Exibir o gráfico
+plt.show()
+
+# EXPECTATIVA DE VIDA DO BRASIL E VIZINHOS
+
+# Abrindo o arquivo csv
+df = pd.read_csv('expectativa_vida.csv')
+
+# Filtrar os dados para o Brasil e os países vizinhos
+paises_interesse = ['Brazil', 'Chile', 'Colombia', 'Ecuador', 'Peru', 'Argentina', 'Venezuela', 'Bolivia', 'Paraguay', 'Uruguay', 'Suriname'] 
+
+# Filtrar os dados para os países de interesse
+df_interesse = df[df['Country'].isin(paises_interesse)]
+
+# Configurar o tamanho do gráfico
+plt.figure(figsize=(10, 6))
+
+# Plotar a expectativa de vida em relação aos anos para cada país
+for pais in paises_interesse:
+    df_pais = df_interesse[df_interesse['Country'] == pais]
+    # Se o país for o Brasil, plotar o gráfico em preto
+    if pais == 'Brazil':
+        plt.plot(df_pais['Year'], df_pais['Life expectancy'], label=pais, color='black', linewidth=3)
+    else:
+        plt.plot(df_pais['Year'], df_pais['Life expectancy'], label=pais)
 
 # Adicionar rótulos e título ao gráfico
 plt.xlabel('Ano')
